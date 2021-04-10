@@ -9,10 +9,13 @@
  * @license  agpl-3.0 https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/licensing-a-repository
  * @link     pbgroupeu.wordpress.com
  */
+
 declare(strict_types=1);
 
 use App\Application\Actions\Action;
+use App\Application\ResponseEmitter\CarRepository;
 use Hateoas\Hateoas;
+use Psr\Log\LoggerInterface;
 
 /**
  * API callbacks abstraction
@@ -31,4 +34,28 @@ abstract class ApiAction extends Action
      * @var Hateoas
      */
     protected $serializer;
+
+    /**
+     * Car repository
+     *
+     * @var CarRepository
+     */
+    protected $carRepository;
+
+    /**
+     * Constructor
+     *
+     * @param Hateoas         $hateoas Serializer
+     * @param CarRepository   $carRepository Car Repository
+     * @param LoggerInterface $loggerInterface Logger
+     */
+    public function __construct(
+        Hateoas $hateoas,
+        CarRepository $carRepository,
+        LoggerInterface $loggerInterface
+    ) {
+        $this->serializer = $hateoas;
+        $this->carRepository = $carRepository;
+        $this->logger = $loggerInterface;
+    }
 }
