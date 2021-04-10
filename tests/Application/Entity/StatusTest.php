@@ -11,6 +11,8 @@
  */
 declare(strict_types=1);
 
+namespace Tests\Application\Entity;
+
 use App\Application\Entity\Status;
 use Tests\TestCase;
 

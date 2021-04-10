@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Application\Entity;
 
-use App\Application\Entity\User;
+use App\Application\Entity\Car;
 use Tests\TestCase;
 
 /**
@@ -25,7 +25,7 @@ use Tests\TestCase;
  * @license  isc https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/licensing-a-repository
  * @link     pbgroupeu.wordpress.com
  */
-class UserTest extends TestCase
+class CarTest extends TestCase
 {
     /**
      * Usual entity SOLID case
@@ -34,15 +34,13 @@ class UserTest extends TestCase
      */
     public function testEntityDependencyInjection()
     {
-        $user = $this
-            ->getMockBuilder(User::class)
+        $car = $this
+            ->getMockBuilder(Car::class)
             ->disableOriginalConstructor()
             ->disableArgumentCloning()
             ->getMock();
 
-        $this->assertIsObject($user);
-        $this->assertObjectNotHasAttribute('id', $user);
+        $this->assertIsObject($car);
+        $this->assertObjectNotHasAttribute('id', $car);
     }
 }
-
-
