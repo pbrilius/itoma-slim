@@ -1,0 +1,49 @@
+App\Application\Entity\User:
+    type: entity
+    table: user
+    indexes:
+        segment_id:
+            columns:
+                - segment_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                comment: 'primary key'
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        createTime:
+            type: datetime
+            nullable: true
+            options:
+                comment: 'create time'
+            column: create_time
+        updateTime:
+            type: datetime
+            nullable: true
+            options:
+                comment: 'update time'
+            column: update_time
+        email:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+                comment: Email
+    manyToOne:
+        segment:
+            targetEntity: App\Application\Entity\Segment
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                segment_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

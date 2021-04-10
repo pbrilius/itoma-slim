@@ -1,0 +1,49 @@
+App\Application\Entity\Status:
+    type: entity
+    table: status
+    indexes:
+        parent:
+            columns:
+                - parent
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                comment: 'primary key'
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        createTime:
+            type: datetime
+            nullable: true
+            options:
+                comment: 'create time'
+            column: create_time
+        updateTime:
+            type: datetime
+            nullable: true
+            options:
+                comment: 'update time'
+            column: update_time
+        name:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+                comment: label
+    manyToOne:
+        parent:
+            targetEntity: App\Application\Entity\Status
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                parent:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
