@@ -1,6 +1,7 @@
 App\Application\Entity\Car:
     type: entity
     table: car
+    repositoryClass: App\Application\ResponseEmitter\CarRepository
     id:
         id:
             type: integer
