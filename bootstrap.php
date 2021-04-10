@@ -32,8 +32,5 @@ $dbParams = array(
     'port' => 3306,
 );
 
-// var_dump($dbParams); die;
-
-// $config = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
 $config = Setup::createYAMLMetadataConfiguration($paths, $isDevMode);
 $entityManager = EntityManager::create($dbParams, $config);
