@@ -46,4 +46,13 @@ App\Application\Entity\Status:
                 parent:
                     referencedColumnName: id
             orphanRemoval: false
+    manyToMany:
+        car:
+            targetEntity: App\Application\Entity\Car
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: status
+            inversedBy: null
+            joinTable: null
+            orderBy: null
     lifecycleCallbacks: {  }

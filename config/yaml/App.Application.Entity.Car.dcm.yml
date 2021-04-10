@@ -45,4 +45,22 @@ App\Application\Entity\Car:
             options:
                 fixed: false
                 comment: 'Car model'
+    manyToMany:
+        status:
+            targetEntity: App\Application\Entity\Status
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: car
+            joinTable:
+                name: cars_statuses
+                joinColumns:
+                    -
+                        name: car_id
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: status_id
+                        referencedColumnName: id
+            orderBy: null
     lifecycleCallbacks: {  }

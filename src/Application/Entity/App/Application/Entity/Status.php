@@ -138,4 +138,52 @@ class Status
     {
         return $this->parent;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $car;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->car = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add car.
+     *
+     * @param \App\Application\Entity\Car $car
+     *
+     * @return Status
+     */
+    public function addCar(\App\Application\Entity\Car $car)
+    {
+        $this->car[] = $car;
+
+        return $this;
+    }
+
+    /**
+     * Remove car.
+     *
+     * @param \App\Application\Entity\Car $car
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeCar(\App\Application\Entity\Car $car)
+    {
+        return $this->car->removeElement($car);
+    }
+
+    /**
+     * Get car.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCar()
+    {
+        return $this->car;
+    }
 }
