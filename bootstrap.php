@@ -12,19 +12,27 @@
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Setup;
+use Symfony\Component\Dotenv\Dotenv;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
+$dotenv = new Dotenv();
+$dotenv->load(__DIR__ . '/.env');
+
 $paths = array(__DIR__ . '/src/Application/Entity');
-$isDevMode = getenv('MODE') === 'DEV' ? true : false;
+$isDevMode = $_SERVER['MODE'] === 'DEV' ? true : false;
 
 // the connection configuration
 $dbParams = array(
     'driver'   => 'pdo_mysql',
-    'user'     => getenv('DATABASE_USER'),
-    'password' => getenv('DAtaBASE_PASSWORD'),
-    'dbname'   => getenv('DATABASE_NAME'),
+    'user'     => $_SERVER['DATABASE_USER'],
+    'password' => $_SERVER['DATABASE_PASSWORD'],
+    'dbname'   => $_SERVER['DATABASE_NAME'],
+    'host' => '127.0.0.1',
+    'port' => 3306,
 );
+
+// var_dump($dbParams); die;
 
 $config = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
 $entityManager = EntityManager::create($dbParams, $config);
