@@ -13,23 +13,18 @@
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Setup;
 
-require_once dirname(__DIR__) . '/vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
-// Create a simple "default" Doctrine ORM configuration for Annotations
-$isDevMode = getenv('MODE') === 'dev' ? true : false;
-$proxyDir = null;
-$cache = null;
-$useSimpleAnnotationReader = false;
-$config = Setup::createAnnotationMetadataConfiguration(array(__DIR__ . "/src"), $isDevMode, $proxyDir, $cache, $useSimpleAnnotationReader);
-// or if you prefer yaml or XML
-//$config = Setup::createXMLMetadataConfiguration(array(__DIR__."/config/xml"), $isDevMode);
-//$config = Setup::createYAMLMetadataConfiguration(array(__DIR__."/config/yaml"), $isDevMode);
+$paths = array(__DIR__ . '/src/Application/Entity');
+$isDevMode = getenv('MODE') === 'DEV' ? true : false;
 
-// database configuration parameters
-$conn = array(
-    'driver' => 'pdo_sqlite',
-    'path' => __DIR__ . '/db.sqlite',
+// the connection configuration
+$dbParams = array(
+    'driver'   => 'pdo_mysql',
+    'user'     => getenv('DATABASE_USER'),
+    'password' => getenv('DAtaBASE_PASSWORD'),
+    'dbname'   => getenv('DATABASE_NAME'),
 );
 
-// obtaining the entity manager
-$entityManager = EntityManager::create($conn, $config);
+$config = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
+$entityManager = EntityManager::create($dbParams, $config);
