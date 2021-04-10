@@ -35,6 +35,7 @@
     },
     "require-dev": {
         "jangregor/phpstan-prophecy": "^0.8.1",
+        "nelmio/alice": "^3.8",
         "phpstan/extension-installer": "^1.1.0",
         "phpstan/phpstan": "^0.12.80",
         "phpunit/phpunit": "^9.5"
