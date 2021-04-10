@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace App\Application\Actions\Api;
 
-use ApiAction;
 use Slim\Psr7\Response;
 
 /**
@@ -35,6 +34,11 @@ class ListItomaCarsAction extends ApiAction
      */
     protected function action(): Response
     {
+        $carRepository = $this->carRepository;
+        $cars = $carRepository->findAll();
+        
+        $this->logger->info('Cars list was viewed');
 
+        return $this->respondWithData($cars);
     }
 }

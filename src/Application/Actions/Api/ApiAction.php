@@ -12,9 +12,10 @@
 
 declare(strict_types=1);
 
+namespace App\Application\Actions\Api;
+
 use App\Application\Actions\Action;
 use App\Application\ResponseEmitter\CarRepository;
-use Hateoas\Hateoas;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -29,13 +30,6 @@ use Psr\Log\LoggerInterface;
 abstract class ApiAction extends Action
 {
     /**
-     * HATEOAS
-     * 
-     * @var Hateoas
-     */
-    protected $serializer;
-
-    /**
      * Car repository
      *
      * @var CarRepository
@@ -45,16 +39,13 @@ abstract class ApiAction extends Action
     /**
      * Constructor
      *
-     * @param Hateoas         $hateoas Serializer
      * @param CarRepository   $carRepository Car Repository
      * @param LoggerInterface $loggerInterface Logger
      */
     public function __construct(
-        Hateoas $hateoas,
         CarRepository $carRepository,
         LoggerInterface $loggerInterface
     ) {
-        $this->serializer = $hateoas;
         $this->carRepository = $carRepository;
         $this->logger = $loggerInterface;
     }
