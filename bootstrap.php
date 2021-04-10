@@ -19,7 +19,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 $dotenv = new Dotenv();
 $dotenv->load(__DIR__ . '/.env');
 
-$paths = array(__DIR__ . '/src/Application/Entity');
+$paths = array(__DIR__ . '/config/yaml');
 $isDevMode = $_SERVER['MODE'] === 'DEV' ? true : false;
 
 // the connection configuration
@@ -34,5 +34,6 @@ $dbParams = array(
 
 // var_dump($dbParams); die;
 
-$config = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
+// $config = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
+$config = Setup::createYAMLMetadataConfiguration($paths, $isDevMode);
 $entityManager = EntityManager::create($dbParams, $config);
