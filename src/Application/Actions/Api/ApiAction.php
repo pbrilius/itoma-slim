@@ -12,6 +12,7 @@
 declare(strict_types=1);
 
 use App\Application\Actions\Action;
+use Hateoas\Hateoas;
 
 /**
  * API callbacks abstraction
@@ -24,5 +25,10 @@ use App\Application\Actions\Action;
  */
 abstract class ApiAction extends Action
 {
-    
+    /**
+     * HATEOAS
+     * 
+     * @var Hateoas
+     */
+    protected $serializer;
 }
