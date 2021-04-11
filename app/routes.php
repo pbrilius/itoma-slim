@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 use App\Application\Actions\Api\ListItomaCarsAction;
@@ -10,10 +11,6 @@ use Slim\App;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 
 return function (App $app) {
-    $app->options('/{routes:.*}', function (Request $request, Response $response) {
-        // CORS Pre-Flight OPTIONS Request Handler
-        return $response;
-    });
 
     $app->get('/', function (Request $request, Response $response) {
         $response->getBody()->write('Hello world!');
@@ -26,10 +23,9 @@ return function (App $app) {
     });
 
     $app->group(
-        '/api/' . getenv(
-        'VERSION'
-    ) . '/', function (Group $routeCollectorProxyInterface) {
-        $routeCollectorProxyInterface->get('itoma-cars', ListItomaCarsAction::class);
-    }
+        '/api/' . $_SERVER['VERSION'] . '/',
+        function (Group $routeCollectorProxyInterface) use ($app) {
+            $routeCollectorProxyInterface->get('itoma-cars', ListItomaCarsAction::class);
+        }
     );
 };

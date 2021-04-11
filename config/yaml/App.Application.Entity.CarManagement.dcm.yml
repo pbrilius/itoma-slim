@@ -1,6 +1,7 @@
 App\Application\Entity\CarManagement:
     type: entity
     table: car_management
+    repositoryClass: App\Application\Repository\CarManagementRepository
     indexes:
         car_id:
             columns:

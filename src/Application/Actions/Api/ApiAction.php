@@ -15,7 +15,7 @@ declare(strict_types=1);
 namespace App\Application\Actions\Api;
 
 use App\Application\Actions\Action;
-use App\Application\ResponseEmitter\CarRepository;
+use App\Application\Repository\CarManagementRepository;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -32,21 +32,21 @@ abstract class ApiAction extends Action
     /**
      * Car repository
      *
-     * @var CarRepository
+     * @var CarManagementRepository
      */
-    protected $carRepository;
+    protected $carManagementRepository;
 
     /**
      * Constructor
      *
-     * @param CarRepository   $carRepository Car Repository
-     * @param LoggerInterface $loggerInterface Logger
+     * @param CarManagementRepository $carManagementRepository Car Management Repository
+     * @param LoggerInterface         $loggerInterface         Logger
      */
     public function __construct(
-        CarRepository $carRepository,
+        CarManagementRepository $carManagementRepository,
         LoggerInterface $loggerInterface
     ) {
-        $this->carRepository = $carRepository;
-        $this->logger = $loggerInterface;
+        parent::__construct($loggerInterface);
+        $this->carManagementRepository = $carManagementRepository;
     }
 }
