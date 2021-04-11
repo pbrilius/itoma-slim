@@ -55,4 +55,7 @@ App\Application\Entity\Status:
             inversedBy: null
             joinTable: null
             orderBy: null
-    lifecycleCallbacks: {  }
+    lifecycleCallbacks:
+        prePersist: [ preCreate ]
+        preUpdate:  [ preupdate ]
+

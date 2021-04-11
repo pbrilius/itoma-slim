@@ -64,4 +64,7 @@ App\Application\Entity\Car:
                         name: status_id
                         referencedColumnName: id
             orderBy: null
-    lifecycleCallbacks: {  }
+    lifecycleCallbacks:
+        prePersist: [ preCreate ]
+        preUpdate:  [ preupdate ]
+

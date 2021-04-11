@@ -46,4 +46,6 @@ App\Application\Entity\User:
                 segment_id:
                     referencedColumnName: id
             orphanRemoval: false
-    lifecycleCallbacks: {  }
+    lifecycleCallbacks:
+        prePersist: [ preCreate ]
+        preUpdate:  [ preupdate ]

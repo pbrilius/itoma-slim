@@ -32,6 +32,26 @@ class User
      */
     private $segment;
 
+    /**
+     * Pre-create hook
+     *
+     * @return void
+     */
+    public function preCreate()
+    {
+        $this->setCreateTime(new \DateTime());
+    }
+
+    /**
+     * Pre-update hook
+     * 
+     * @return void
+     */
+    public function preUpdate()
+    {
+        $this->setUpdateTime(new \DateTime());
+    }
+
 
     /**
      * Get id.

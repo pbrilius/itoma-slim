@@ -60,4 +60,7 @@ App\Application\Entity\CarManagement:
                 user_id:
                     referencedColumnName: id
             orphanRemoval: false
-    lifecycleCallbacks: {  }
+    lifecycleCallbacks:
+        prePersist: [ preCreate ]
+        preUpdate:  [ preupdate ]
+

@@ -31,4 +31,7 @@ App\Application\Entity\Segment:
             options:
                 fixed: false
                 comment: Label
-    lifecycleCallbacks: {  }
+    lifecycleCallbacks:
+        prePersist: [ preCreate ]
+        preUpdate:  [ preupdate ]
+
