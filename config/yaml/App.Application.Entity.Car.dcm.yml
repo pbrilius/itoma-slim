@@ -1,0 +1,69 @@
+App\Application\Entity\Car:
+    type: entity
+    table: car
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                comment: 'primary key'
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        createTime:
+            type: datetime
+            nullable: true
+            options:
+                comment: 'create time'
+            column: create_time
+        updateTime:
+            type: datetime
+            nullable: true
+            options:
+                comment: 'update time'
+            column: update_time
+        carNumber:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+                comment: 'Car number'
+            column: car_number
+        yearMade:
+            type: date
+            nullable: false
+            options:
+                comment: 'year made'
+            column: year_made
+        model:
+            type: string
+            nullable: false
+            length: 256
+            options:
+                fixed: false
+                comment: 'Car model'
+    manyToMany:
+        status:
+            targetEntity: App\Application\Entity\Status
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: car
+            joinTable:
+                name: cars_statuses
+                joinColumns:
+                    -
+                        name: car_id
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: status_id
+                        referencedColumnName: id
+            orderBy: null
+    lifecycleCallbacks:
+        prePersist: [ preCreate ]
+        preUpdate:  [ preupdate ]
+

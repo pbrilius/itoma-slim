@@ -1,0 +1,26 @@
+App\Application\Entity\Segment:
+  segment{1..16}:
+    name: '<username()>'
+
+App\Application\Entity\User:
+  user{1..16}:
+    email: '<email()>'
+    segment: '@segment<current()>'
+
+App\Application\Entity\Status:
+  status{1..20}:
+    name: '<name()>'
+App\Application\Entity\Car:
+  car{1..10}:
+    carNumber: '<numberBetween(1000, 10000)>'
+    yearMade: '<dateTimeBetween("-4 years", "now")>'
+    model: '<username()>'
+    __calls:
+      - addStatus: ['@status<numberBetween(1, 20)>']
+
+App\Application\Entity\CarManagement:
+  car_management{1..15}:
+    car: '@car<numberBetween(1, 10)>'
+    user: '@user<numberBetween(1, 16)>'
+    dateFrom: '<dateTimeBetween("-4 years", "-2 years")>'
+    dateTo: '<dateTimeBetween("-2 years", "now")>'

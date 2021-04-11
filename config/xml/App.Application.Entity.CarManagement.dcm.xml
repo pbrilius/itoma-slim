@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity repository-class="App\Application\Repository\CarManagementRepository" name="App\Application\Entity\CarManagement" table="car_management">
+    <indexes>
+      <index name="car_id" columns="car_id"/>
+      <index name="user_id" columns="user_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="createTime" type="datetime" column="create_time" nullable="true">
+      <options>
+        <option name="comment">create time</option>
+      </options>
+    </field>
+    <field name="updateTime" type="datetime" column="update_time" nullable="true">
+      <options>
+        <option name="comment">update time</option>
+      </options>
+    </field>
+    <field name="dateFrom" type="datetime" column="date_from" nullable="false"/>
+    <field name="dateTo" type="datetime" column="date_to" nullable="true"/>
+    <many-to-one field="car" target-entity="App\Application\Entity\Car" fetch="LAZY">
+      <join-columns>
+        <join-column name="car_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="user" target-entity="App\Application\Entity\User" fetch="LAZY">
+      <join-columns>
+        <join-column name="user_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <lifecycle-callbacks>
+      <lifecycle-callback type="prePersist" method="preCreate"/>
+      <lifecycle-callback type="preUpdate" method="preupdate"/>
+    </lifecycle-callbacks>
+  </entity>
+</doctrine-mapping>

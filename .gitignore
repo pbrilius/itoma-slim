@@ -5,3 +5,9 @@
 /logs/*
 !/logs/README.md
 .phpunit.result.cache
+
+# Project
+.env
+
+# Session
+*.session.sql
