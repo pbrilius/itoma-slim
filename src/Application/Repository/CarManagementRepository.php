@@ -4,6 +4,7 @@ namespace App\Application\Repository;
 
 use App\Application\Entity\Car;
 use App\Application\Entity\CarManagement;
+use App\Application\Entity\Segment;
 use App\Application\Entity\Status;
 use App\Application\Entity\User;
 
@@ -30,12 +31,15 @@ class CarManagementRepository extends \Doctrine\ORM\EntityRepository
                 . ' c.carNumber,'
                 . ' c.yearMade,'
                 . ' c.model,'
-                . ' s.name AS status'
+                . ' s.name AS status,'
+                . ' u.email,'
+                . ' ss.name AS segment'
             )
             ->from(CarManagement::class, 'cm')
             ->innerJoin(Car::class, 'c')
             ->join(Status::class, 's')
             ->innerJoin(User::class, 'u')
+            ->join(Segment::class, 'ss')
             ->setFirstResult(1)
             ->setMaxResults(20);
 
