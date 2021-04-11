@@ -23,10 +23,18 @@ class CarManagementRepository extends \Doctrine\ORM\EntityRepository
     {
         $queryBuilder = $this->createQueryBuilder('q');
         $queryBuilder
-            ->select('cm.dateFrom, cm.dateTo')
+            ->select(
+                'cm.dateFrom,'
+                . ' cm.dateTo,'
+                . ' c.carNumber,'
+                . ' c.yearMade,'
+                . ' c.model'
+            )
             ->from(CarManagement::class, 'cm')
             ->innerJoin(Car::class, 'c')
-            ->innerJoin(User::class, 'u');
+            ->innerJoin(User::class, 'u')
+            ->setFirstResult(1)
+            ->setMaxResults(20);
 
         return $queryBuilder->getQuery()->getArrayResult();
     }
