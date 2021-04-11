@@ -2,6 +2,10 @@
 
 namespace App\Application\ResponseEmitter;
 
+use App\Application\Entity\Car;
+use App\Application\Entity\CarManagement;
+use App\Application\Entity\User;
+
 /**
  * CarRepository
  *
@@ -10,4 +14,20 @@ namespace App\Application\ResponseEmitter;
  */
 class CarRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * Friedman composition
+     *
+     * @return array
+     */
+    public function retrieveCarManagementPanel()
+    {
+        $qeuryBuilder = $this->createQueryBuilder('q');
+
+        $qeuryBuilder
+            ->select(CarManagement::class)
+            ->innerJoin(Car::class, 'c')
+            ->innerJoin(User::class, 'u');
+
+        return $qeuryBuilder->getQuery()->getArrayResult();
+    }
 }

@@ -35,7 +35,7 @@ class ListItomaCarsAction extends ApiAction
     protected function action(): Response
     {
         $carRepository = $this->carRepository;
-        $cars = $carRepository->findAll();
+        $cars = $carRepository->retrieveCarManagementPanel();
         
         $this->logger->info('Cars list was viewed');
 
