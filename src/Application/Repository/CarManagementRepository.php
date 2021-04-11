@@ -4,6 +4,7 @@ namespace App\Application\Repository;
 
 use App\Application\Entity\Car;
 use App\Application\Entity\CarManagement;
+use App\Application\Entity\Status;
 use App\Application\Entity\User;
 
 /**
@@ -28,10 +29,12 @@ class CarManagementRepository extends \Doctrine\ORM\EntityRepository
                 . ' cm.dateTo,'
                 . ' c.carNumber,'
                 . ' c.yearMade,'
-                . ' c.model'
+                . ' c.model,'
+                . ' s.name AS status'
             )
             ->from(CarManagement::class, 'cm')
             ->innerJoin(Car::class, 'c')
+            ->join(Status::class, 's')
             ->innerJoin(User::class, 'u')
             ->setFirstResult(1)
             ->setMaxResults(20);
