@@ -32,7 +32,7 @@ class CarManagementRepository extends \Doctrine\ORM\EntityRepository
                 . ' c.yearMade,'
                 . ' c.model,'
                 . ' s.name AS status,'
-                . ' u.email,'
+                . ' u.email AS manager_email,'
                 . ' ss.name AS segment'
             )
             ->from(CarManagement::class, 'cm')
