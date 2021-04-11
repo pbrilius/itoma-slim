@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 use App\Application\Settings\SettingsInterface;
 use DI\ContainerBuilder;
+use Doctrine\ORM\EntityManager;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Monolog\Processor\UidProcessor;
@@ -25,5 +26,10 @@ return function (ContainerBuilder $containerBuilder) {
 
             return $logger;
         },
+        EntityManager::class => function (ContainerInterface $containerInterface) {
+            include __DIR__ . '/../bootstrap.php';
+
+            return $entityManager;
+        }
     ]);
 };
