@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="App\Application\Entity\Status" table="status">
+    <indexes>
+      <index name="parent" columns="parent"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="createTime" type="datetime" column="create_time" nullable="true">
+      <options>
+        <option name="comment">create time</option>
+      </options>
+    </field>
+    <field name="updateTime" type="datetime" column="update_time" nullable="true">
+      <options>
+        <option name="comment">update time</option>
+      </options>
+    </field>
+    <field name="name" type="string" column="name" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">label</option>
+      </options>
+    </field>
+    <many-to-one field="parent" target-entity="App\Application\Entity\Status" fetch="LAZY">
+      <join-columns>
+        <join-column name="parent" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="car" target-entity="App\Application\Entity\Car" mapped-by="status" fetch="LAZY"/>
+    <lifecycle-callbacks>
+      <lifecycle-callback type="prePersist" method="preCreate"/>
+      <lifecycle-callback type="preUpdate" method="preupdate"/>
+    </lifecycle-callbacks>
+  </entity>
+</doctrine-mapping>

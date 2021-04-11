@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="App\Application\Entity\Car" table="car">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="createTime" type="datetime" column="create_time" nullable="true">
+      <options>
+        <option name="comment">create time</option>
+      </options>
+    </field>
+    <field name="updateTime" type="datetime" column="update_time" nullable="true">
+      <options>
+        <option name="comment">update time</option>
+      </options>
+    </field>
+    <field name="carNumber" type="string" column="car_number" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Car number</option>
+      </options>
+    </field>
+    <field name="yearMade" type="date" column="year_made" nullable="false">
+      <options>
+        <option name="comment">year made</option>
+      </options>
+    </field>
+    <field name="model" type="string" column="model" length="256" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Car model</option>
+      </options>
+    </field>
+    <many-to-many field="status" target-entity="App\Application\Entity\Status" inversed-by="car" fetch="LAZY">
+      <join-table name="cars_statuses">
+        <join-columns>
+          <join-column name="car_id" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="status_id" referenced-column-name="id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+    <lifecycle-callbacks>
+      <lifecycle-callback type="prePersist" method="preCreate"/>
+      <lifecycle-callback type="preUpdate" method="preupdate"/>
+    </lifecycle-callbacks>
+  </entity>
+</doctrine-mapping>

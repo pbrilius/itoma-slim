@@ -19,7 +19,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 $dotenv = new Dotenv();
 $dotenv->load(__DIR__ . '/.env');
 
-$paths = array(__DIR__ . '/config/yaml');
+$paths = array(__DIR__ . '/config/xml');
 $isDevMode = $_SERVER['MODE'] === 'DEV' ? true : false;
 
 // the connection configuration
@@ -32,5 +32,5 @@ $dbParams = array(
     'port' => 3306,
 );
 
-$config = Setup::createYAMLMetadataConfiguration($paths, $isDevMode);
+$config = Setup::createXMLMetadataConfiguration($paths, $isDevMode);
 $entityManager = EntityManager::create($dbParams, $config);
