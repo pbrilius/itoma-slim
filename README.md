@@ -13,6 +13,7 @@ composer dump-autoload -o
 ```shell
 cp -v .env.dist .env
 ./vendor/bin/doctrine orm:schema-tool:create
+php ./bin/fixtures.php
 ```
 
 ## TDD
