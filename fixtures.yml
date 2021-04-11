@@ -1,0 +1,8 @@
+App\Application\Entity\Segment:
+  segment{1..16}:
+    name: '<username()>'
+
+App\Application\Entity\User:
+  user{1..16}:
+    email: '<email()>'
+    segment: '@segment<current()>'
